@@ -25,6 +25,11 @@
 // and ProfilerThroughputBegin() calls should be used. The throughput APIs can only be used
 // with fixed events.
 //
+// CNTK specifics
+//
+// The profiler is turned off during the very first epoch to avoid polluting profile data with
+// times that are typically larger (warm-up).
+//
 
 #pragma once
 
@@ -67,7 +72,7 @@ enum ProfilerEvents
     profilerSepSpace2,
 
     // Data reader events
-    profilerEvtReadMinibatch,               // Time spend reading minibatch on async thread
+    profilerEvtPrefetchMinibatch,           // Prefetching the next minibatch in a background thread
 
     profilerEvtMax
 };
